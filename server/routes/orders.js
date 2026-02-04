@@ -82,11 +82,16 @@ router.get('/analytics', async (req, res) => {
     try {
         let todayOrders = [];
         if (req.useMockDB) {
-            todayOrders = global.mockOrders;
+            // Exclude "In Cart" from mock analytics
+            todayOrders = global.mockOrders.filter(o => o.status !== 'In Cart');
         } else {
             const startOfDay = new Date();
             startOfDay.setHours(0, 0, 0, 0);
-            todayOrders = await Order.find({ timestamp: { $gte: startOfDay } });
+            // Exclude "In Cart" from real DB analytics
+            todayOrders = await Order.find({
+                timestamp: { $gte: startOfDay },
+                status: { $ne: 'In Cart' }
+            });
         }
 
         const stats = {
@@ -102,17 +107,24 @@ router.get('/analytics', async (req, res) => {
     }
 });
 
-// Update status
+// Update status and details
 router.patch('/:id', async (req, res) => {
     try {
-        const { status } = req.body;
+        const { status, roomNumber, specialInstructions } = req.body;
+        const updateData = {};
+        if (status) updateData.status = status;
+        if (roomNumber) updateData.roomNumber = roomNumber;
+        if (specialInstructions !== undefined) updateData.specialInstructions = specialInstructions;
+
         if (req.useMockDB) {
             const idx = global.mockOrders.findIndex(o => o._id === req.params.id);
             if (idx === -1) return res.status(404).json({ error: 'Order not found' });
-            global.mockOrders[idx].status = status;
+
+            global.mockOrders[idx] = { ...global.mockOrders[idx], ...updateData };
             return res.json(global.mockOrders[idx]);
         }
-        const order = await Order.findByIdAndUpdate(req.params.id, { status }, { new: true });
+
+        const order = await Order.findByIdAndUpdate(req.params.id, updateData, { new: true });
         if (!order) return res.status(404).json({ error: 'Order not found' });
         res.json(order);
     } catch (error) {

@@ -46,17 +46,20 @@ function OrderForm({ orderItems, onRemoveItem, onOrderComplete, onClearOrder }) 
         setError(null)
 
         try {
-            // Submit each item as a separate order
-            // In production, you might want a single order with multiple items
+            // Update each item from 'In Cart' to 'Pending'
             for (const item of orderItems) {
-                const response = await fetch('/api/orders', {
-                    method: 'POST',
+                const url = item._id ? `/api/orders/${item._id}` : '/api/orders';
+                const method = item._id ? 'PATCH' : 'POST';
+
+                const response = await fetch(url, {
+                    method: method,
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         itemType: item.name,
                         quantity: item.quantity,
                         roomNumber: roomNumber.trim(),
-                        specialInstructions: specialInstructions.trim()
+                        specialInstructions: specialInstructions.trim(),
+                        status: 'Pending' // Finalize order
                     })
                 })
 

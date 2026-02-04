@@ -56,21 +56,31 @@ function HomePage() {
 
     // Add item to order
     const handleAddToOrder = async (item) => {
-        setOrderItems(prev => [...prev, item])
-        setSelectedCard(null) // Collapse the card after adding
+        // Optimistically add to UI
+        const tempId = Date.now();
+        const newItem = { ...item, tempId };
+        setOrderItems(prev => [...prev, newItem])
+        setSelectedCard(null)
 
-        // Proactive: Send "In Cart" notification to server so admin sees it!
         try {
-            await fetch('/api/orders', {
+            const response = await fetch('/api/orders', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     itemType: item.name,
                     quantity: item.quantity,
-                    roomNumber: '...', // Placeholder until checkout
+                    roomNumber: '...',
                     status: 'In Cart'
                 })
             })
+
+            if (response.ok) {
+                const savedOrder = await response.json();
+                // Link server ID to local item
+                setOrderItems(prev => prev.map(i =>
+                    i.tempId === tempId ? { ...i, _id: savedOrder._id } : i
+                ));
+            }
         } catch (err) {
             console.error('Failed to notify admin of cart action:', err)
         }
