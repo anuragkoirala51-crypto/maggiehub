@@ -1,0 +1,88 @@
+/* =============================================================================
+   HOME PAGE STYLES
+   ============================================================================= */
+
+.home-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Menu Section */
+.menu-section {
+    padding: 6rem 0;
+    background: var(--bg-primary);
+    position: relative;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.section-header p {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Order Section */
+.order-section {
+    padding: 6rem 0;
+    background: var(--bg-secondary);
+}
+
+.order-section .container {
+    max-width: 600px;
+}
+
+/* Footer */
+.footer {
+    padding: 4rem 1.5rem;
+    text-align: center;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--glass-border);
+    margin-top: auto;
+}
+
+.footer p {
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.footer-sub {
+    font-size: 0.875rem !important;
+    color: var(--text-muted) !important;
+    margin-top: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .menu-section,
+    .order-section {
+        padding: 4rem 0;
+    }
+
+    .section-header h2 {
+        font-size: 2.25rem;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+    }
+}

@@ -1,0 +1,217 @@
+/* =============================================================================
+   ORDER FORM STYLES
+   ============================================================================= */
+
+.order-form {
+    padding: 2rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+}
+
+.form-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Order Items List */
+.order-items {
+    margin-bottom: 1rem;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.item-info {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.item-qty {
+    font-weight: 600;
+    color: var(--accent-gold);
+}
+
+.order-item .item-name {
+    color: var(--text-primary);
+}
+
+.order-item .item-price {
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.remove-btn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.remove-btn:hover {
+    color: var(--accent-red);
+    border-color: var(--accent-red);
+}
+
+/* Order Total */
+.order-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    margin-bottom: 1.5rem;
+    border-top: 2px solid var(--glass-border);
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.order-total .total-amount {
+    font-size: 1.5rem;
+    color: var(--accent-gold);
+}
+
+/* Form Inputs */
+.order-form .input-group {
+    margin-bottom: 1rem;
+}
+
+.order-form textarea.input {
+    resize: none;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 1.25rem;
+    font-size: 1.125rem;
+    margin-top: 1rem;
+}
+
+.submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Error Message */
+.error-message {
+    padding: 0.75rem 1rem;
+    background: rgba(231, 76, 60, 0.1);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    border-radius: 8px;
+    color: var(--accent-red);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+/* =============================================================================
+   ORDER SUCCESS STATE
+   ============================================================================= */
+
+.order-success {
+    padding: 3rem 2rem;
+    text-align: center;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2.5rem;
+    color: var(--bg-primary);
+    background: var(--accent-green);
+    border-radius: 50%;
+}
+
+.order-success h3 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.order-success p {
+    color: var(--text-secondary);
+}
+
+.room-confirm {
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 199, 44, 0.1);
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.room-confirm strong {
+    color: var(--accent-gold);
+}
+
+/* Payment Section */
+.payment-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--glass-border);
+}
+
+.payment-label {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.qr-placeholder {
+    display: flex;
+    justify-content: center;
+}
+
+.qr-code {
+    width: 180px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 12px;
+    color: var(--bg-primary);
+}
+
+.qr-code span {
+    font-weight: 600;
+}
+
+.qr-code small {
+    margin-top: 0.5rem;
+    color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .order-form {
+        padding: 1.5rem;
+    }
+
+    .order-success {
+        padding: 2rem 1.5rem;
+    }
+}
